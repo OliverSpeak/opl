@@ -1,79 +1,121 @@
-    <?php
-    // http://localhost/opl.php/search?term={term}&reading={reading}
+<?php
+  // For dev insight, remove all '//##' tags and disable header().
+  // /search?term={term}&reading={reading} <- URI
 
-    // Process url query
-    $url = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-    $term = $_GET['term'];
-    $reading = $_GET['reading'];
-    // Create $list - an array of all audio files, with just the words as the string
-    $list = scandir("assets/audio/");
-    $excessfiletext = array('pronunciation_ja_','.mp3');
-    for ($i = 0; $i < sizeof($list); $i++) {
-      $list[$i] = str_replace($excessfiletext,"",$list[$i]);
-    }
-    // Replace $list diacritics (濁点) with friendly counterparts because there's a stupid nuance when processed by PHP
-     $bad_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ'); // Diacrities after processed by PHP
-    $good_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ');
-    for ($i = 0; $i < sizeof($list); $i++) {
-      $list[$i] = str_replace($bad_diacritic,$good_diacritic,$list[$i]);
-    }
-    print_r($list);
-    echo "<p>Term: ".$term."<p>"."Reading: ".$reading."<p>";
+  error_reporting(E_ALL);
+  ini_set("display_errors", 1);
 
-    $result = 0; // Changes to 1 if any result is found.
-    $term_result = 0; // Changes to term.
-    $reading_result = 0;
+  // Process url query
+  $term = $_GET['term'];
+  $reading = $_GET['reading'];
 
-    // Search using Term
+  // Create $list - an array of all audio files, with just the words as the string
+  $list = scandir("assets/audio/");
+  $excessfiletext = array('pronunciation_ja_','.mp3');
+  for ($i = 0; $i < sizeof($list); $i++) {
+    $list[$i] = str_replace($excessfiletext,"",$list[$i]);
+  }
+  // Replace $list diacritics (濁点) with friendly counterparts because there's a dumb nuance when kana is processed by PHP (different byte values).
+    $bad_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ'); // Diacrities after processed by PHP
+  $good_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ');
+  for ($i = 0; $i < sizeof($list); $i++) {
+    $list[$i] = str_replace($bad_diacritic,$good_diacritic,$list[$i]);
+  }
+  //##print_r($list); echo "<p>Term: ".$term."<p>"."Reading: ".$reading."<p>";
 
-    if(in_array($term,$list)){
-      $term_result = $term;
-      $result = 1;
-      echo $term;
-    }
-    foreach($list as $key=>$value){ // For searching words with Term&Reading
-      $ex_val=explode('_',$value);
-      if(count($ex_val) == 2){
-        if($term == explode('_',$value)[0]){
-          echo 'Term Result: '.$list[$key];
-          $term_result = $list[$key];
-          $result = 1;
-        } else if($term == explode('_',$value)[1]){
-          echo 'Term Result: '.$list[$key];
-          $term_result = $list[$key];
-          $result = 1;
-        }
-        }
-    } 
-    echo '<p>$result: '.$result.'<p>';
+  // Searching 
+  $term_result = 0; // Changes to 1 if term result is found.
+  $term_answer = 0; // Changes to $term for injecting into $target.
 
-    // Redirect if a result is found
-    if ($result ==! 0) {
-      $target = "http://$_SERVER[HTTP_HOST]/opl/assets/audio/pronunciation_ja_$term_result.mp3";
-      echo '$target: '.$target;
-      header('Location: '.$target);
-      exit();
-    }
-    ?>
+  $reading_result = 0; // Changes to 1 if reading result is found.
+  $reading_answer = 0; // Changes to $reading for injecting into $target.
+
+  // Search using $term
+  if(in_array($term,$list)){
+    $term_answer = $term;
+    $term_result = 1;
+    //##echo $term;
+  }
+  foreach($list as $key=>$value){ // For searching words with term and reading (e.g. 前々から_まえまえから)
+    $ex_val=explode('_',$value);
+    if(count($ex_val) == 2){
+      if($term == explode('_',$value)[0]){
+        //##echo 'Term Result: '.$list[$key];
+        $term_answer = $list[$key];
+        $term_result = 1;
+      } else if($term == explode('_',$value)[1]){
+        //##echo 'Term Result: '.$list[$key];
+        $term_answer = $list[$key];
+        $term_result = 1;
+      }
+      }
+  } 
+  //##echo '<p>$term_result: '.$term_result.'<p>';
+
+  // Redirect if a term result is found
+  if ($term_result ==! 0) {
+    $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$term_answer.mp3";
+    header('Location: '.$target);
+    exit();
+  }
+
+  // Search using $reading
+  if(in_array($reading,$list)){
+    $reading_answer = $reading;
+    $reading_result = 1;
+    //##echo $reading;
+  }
+  foreach($list as $key=>$value){ // For searching words with term and reading (e.g. 前々から_まえまえから)
+    $ex_val=explode('_',$value);
+    if(count($ex_val) == 2){
+      if($reading == explode('_',$value)[0]){
+        //##echo 'Reading Result: '.$list[$key];
+        $reading_answer = $list[$key];
+        $reading_result = 1;
+      } else if($reading == explode('_',$value)[1]){
+        //##echo 'Reading Result: '.$list[$key];
+        $reading_answer = $list[$key];
+        $reading_result = 1;
+      }
+      }
+  } 
+  //##echo '<p>$reading_result: '.$term_result.'<p>';
+
+  // Redirect if a reading result is found
+  if ($reading_result ==! 0) {
+    $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$reading_answer.mp3";
+    header('Location: '.$target);
+    exit();
+  }
+?>
 
 <!DOCTYPE html>
 <html>
   <head>
-      <title>List</title>
+      <title>The Back End - OPL</title>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
+  <style>
+    body {
+    font-family: "Arial", sans-serif;
+    font-size: 1em;
+    }
+    a:link {
+      color: var(--color-text);
+      font-family: "Arial", sans-serif;
+    }
+    a:visited {
+      color: var(--color-text);
+    }
+    a:hover {
+      text-decoration: none;
+    }
+  </style>
   <body>
-    <p>Uh, you're in the back end right now... Follow <a href=/opl>this</a> link to return to the main page.
-    <!-- List files in html
-    <ul id=audioList>
-      <?php
-        foreach (glob($dir."*.mp3") as $filename) {
-          echo '<li><a href="'.$filename.'">';
-          echo substr($filename.'</li>', 13);
-        }
-      ?>
-    </ul>
-    -->
+    <p>Hello there! Welcome to the back end.</p>
+    <p>Your curiosity paid off, for here is a cat!</p>
+    <p>&emsp;^•ﻌ•^ฅ - meow</p>
+    <p>Follow <a href="/">this</a> link to return to the main page.</p>
   </body>
 </html>
