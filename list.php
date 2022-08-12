@@ -48,10 +48,25 @@
     
     <ul id=audioList>
       <?php
-        foreach (glob("assets/audio/*.mp3") as $filename) {
-          echo '<li><a href="'.$filename.'" target="_blank" rel="noopener noreferrer">';
-          echo substr($filename.'</li>', 13);
-        }
+          // Create $list - an array of all audio files, with just the words as the string
+          $list_temp = scandir("assets/audio/");
+          $excessfiletext = array('pronunciation_ja_','.mp3');
+            for ($i = 0; $i < sizeof($list_temp); $i++) { 
+              $list_temp[$i] = str_replace($excessfiletext,"",$list_temp[$i]);
+          }
+          // Remove first 2 entries (Because they're . and .. from the directory)
+          $list = array_slice($list_temp,2);
+
+          // Replace $list diacritics (濁点) with friendly counterparts because there's a dumb nuance when kana is processed by PHP (different byte values).
+           $bad_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ'); // Diacrities after processed by PHP
+          $good_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ');
+          for ($i = 0; $i < sizeof($list); $i++) {
+            $list[$i] = str_replace($bad_diacritic,$good_diacritic,$list[$i]);
+          }
+          // List all files
+          foreach ($list as $i) {
+            echo '<li><a href="assets/audio/pronunciation_ja_'.$i.'.mp3" target="_blank" rel="noopener noreferrer">'.$i;
+          }
       ?>
     </ul>
 
