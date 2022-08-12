@@ -1,5 +1,4 @@
 <?php
-  // v1.1
   // For dev insight, remove all '//##' tags and disable header().
   // /search?term={term}&reading={reading} <- URI
   error_reporting(E_ALL);
