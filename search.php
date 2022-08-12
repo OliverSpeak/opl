@@ -1,7 +1,7 @@
 <?php
+  // v1.1
   // For dev insight, remove all '//##' tags and disable header().
   // /search?term={term}&reading={reading} <- URI
-
   error_reporting(E_ALL);
   ini_set("display_errors", 1);
 
@@ -16,7 +16,7 @@
     $list[$i] = str_replace($excessfiletext,"",$list[$i]);
   }
   // Replace $list diacritics (濁点) with friendly counterparts because there's a dumb nuance when kana is processed by PHP (different byte values).
-    $bad_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ'); // Diacrities after processed by PHP
+   $bad_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ'); // Diacrities after processed by PHP
   $good_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ');
   for ($i = 0; $i < sizeof($list); $i++) {
     $list[$i] = str_replace($bad_diacritic,$good_diacritic,$list[$i]);
@@ -54,7 +54,8 @@
 
   // Redirect if a term result is found
   if ($term_result ==! 0) {
-    $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$term_answer.mp3";
+    $term_answer_conv = str_replace($good_diacritic,$bad_diacritic,$term_answer); // Reverts diacritic nuance again to match files.
+    $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$term_answer_conv.mp3";
     header('Location: '.$target);
     exit();
   }
@@ -83,12 +84,12 @@
 
   // Redirect if a reading result is found
   if ($reading_result ==! 0) {
-    $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$reading_answer.mp3";
+    $reading_answer_conv = str_replace($good_diacritic,$bad_diacritic,$reading_answer); // Reverts diacritic nuance to match files.
+    $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$reading_answer_conv.mp3";
     header('Location: '.$target);
     exit();
   }
 ?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -113,9 +114,7 @@
     }
   </style>
   <body>
-    <p>Hello there! Welcome to the back end.</p>
-    <p>Your curiosity paid off, for here is a cat!</p>
-    <p>&emsp;^•ﻌ•^ฅ - meow</p>
-    <p>Follow <a href="/">this</a> link to return to the main page.</p>
+    <p>Hello there! Welcome to the back end.<br>Your curiosity paid off, for here is a cat!</p>
+    <p>&emsp;^•ﻌ•^ฅ - meow</p><p>Follow <a href="/">this</a> link to return to the main page.</p>
   </body>
 </html>
