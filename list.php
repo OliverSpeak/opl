@@ -56,16 +56,15 @@
           }
           // Remove first 2 entries (Because they're . and .. from the directory)
           $list = array_slice($list_temp,2);
-
           // Replace $list diacritics (濁点) with friendly counterparts because there's a dumb nuance when kana is processed by PHP (different byte values).
-           $bad_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ'); // Diacrities after processed by PHP
+          $bad_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ'); // Diacrities after processed by PHP
           $good_diacritic = array('が','ぎ','ぐ','げ','ご','ば','び','ぶ','べ','ぼ','だ','ぢ','づ','で','ど','ざ','じ','ず','ぜ','ぞ','ぱ','ぴ','ぷ','ぺ','ぽ','ガ','ギ','グ','ゲ','ゴ','ザ','ジ','ズ','ゼ','ゾ','ダ','ヂ','ヅ','デ','ド','バ','ビ','ブ','ベ','ボ','パ','ピ','プ','ペ','ポ');
           for ($i = 0; $i < sizeof($list); $i++) {
-            $list[$i] = str_replace($bad_diacritic,$good_diacritic,$list[$i]);
+            $good_list[$i] = str_replace($bad_diacritic,$good_diacritic,$list[$i]);
           }
-          // List all files
-          foreach ($list as $i) {
-            echo '<li><a href="assets/audio/pronunciation_ja_'.$i.'.mp3" target="_blank" rel="noopener noreferrer">'.$i;
+          // List all files - accounting for diacritic nuance.
+          foreach (array_combine($list, $good_list) as $i => $good_i) {
+            echo '<li><a href="assets/audio/pronunciation_ja_'.$i.'.mp3" target="_blank" rel="noopener noreferrer">'.$good_i;
           }
       ?>
     </ul>
