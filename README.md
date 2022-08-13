@@ -1,2 +1,3 @@
 # Oliver's Pronunciation Library
-This is a collection of Japanese pronuciation audio files made to cover words, expressions and onomatopoeia that JapanesePod101 doesn't (such as 大貧民, 伝家の宝刀, and ふかふか). This library is optimised for use with Anki, and can be hooked up to Yomichan.
+<p>This is a collection of Japanese pronunciation audio files made to cover words, expressions and onomatopoeia that JapanesePod101 doesn't (such as 大貧民, 伝家の宝刀, and ふかふか). This library is optimised for use with <a href="https://apps.ankiweb.net">Anki</a>, and can be hooked up to <a href="https://foosoft.net/projects/yomichan">Yomichan</a>.</p>
+<p>You can find out more information on the main website.</p>
