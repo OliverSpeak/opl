@@ -9,15 +9,6 @@
       <link rel="stylesheet" href="css/list.css" />
   </head>
   <body>
-    <noscript>
-      <style>
-        /* if Javascript is disabled */
-        #search {
-          display: none;
-        }
-      </style>
-      <input type="text" id="nojs" placeholder="Search library... (Requires Javascript)"/>
-    </noscript>
     <input type="text" id="search" placeholder="Search library..." onkeyup="searchFunction()"/>
     <script>
       // Searching
