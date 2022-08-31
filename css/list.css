@@ -1,6 +1,43 @@
+/* Dark Mode Variables */
+:root {
+    --color-text: black;
+    --color-background: rgb(239, 239, 239);
+    --color-body: white;
+    --color-search: rgb(250, 250, 250);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-text: white;
+      --color-background: black;
+      --color-body: rgb(25, 25, 25);
+      --color-search: rgb(19, 19, 19);
+    }
+  }
+
+/* Link Styling */
+a:link {
+    color: var(--color-text);
+    font-family: "Arial", sans-serif;
+    text-decoration: none;
+  }
+  a:visited {
+    color: var(--color-text);
+  }
+  a:hover {
+    font-weight: bold;
+  }
+  
+/* General Styling */
 body {
+    font-family: "Arial", sans-serif;
     background-color: var(--color-body);
-}
+    color: var(--color-text);
+    font-size: 1em;
+  }
+li {
+    padding-top: 10px ;
+    padding-right: 20px;
+  }
 ul {
     list-style: none;
     margin-top: 50px;
@@ -15,17 +52,19 @@ ul {
     padding-right: 10px;
     left: 50%;
     transform: translateX(-50%);
-    top: 5px;
+    top: 15px;
     width: 70%;
     height: 30px;
     z-index: 2;
     box-shadow: 0px 0px 5px rgb(143, 143, 143);
+    background-color: var(--color-search);
 }
 .backBit {
     position: fixed;
     display: block;
     top: 0;
     width: 100%;
+    height: 30px;
     text-indent: 100%;
     white-space: nowrap;
     overflow: hidden;
