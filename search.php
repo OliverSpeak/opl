@@ -1,7 +1,8 @@
 <?php
+  // Version 1.1
   // For dev insight, remove all '//##' tags and disable header().
   // /search?term={term}&reading={reading} <- URI
-  error_reporting(E_ALL);
+  error_reporting(E_ALL & ~E_NOTICE);
   ini_set("display_errors", 1);
 
   // Process url query
@@ -93,8 +94,16 @@
 <html>
   <head>
       <title>The Back End - OPL</title>
+      <meta name="robots" content="noindex">
       <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="googlebot" content="notranslate" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+      <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
   </head>
   <style>
     body {
@@ -102,18 +111,18 @@
     font-size: 1em;
     }
     a:link {
-      color: var(--color-text);
+      color: black;
       font-family: "Arial", sans-serif;
     }
     a:visited {
-      color: var(--color-text);
+      color: black;
     }
     a:hover {
       text-decoration: none;
     }
   </style>
   <body>
-    <p>Hello there! Welcome to the back end.<br>Your curiosity paid off, for here is a cat!</p>
+    <p>Welcome to the back end.<br>Your curiosity paid off, for here is a cat!</p>
     <p>&emsp;^•ﻌ•^ฅ - meow</p><p>Follow <a href="/">this</a> link to return to the main page.</p>
   </body>
 </html>
