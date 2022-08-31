@@ -2,11 +2,15 @@
 <html>
   <head>
       <title>List</title>
+      <meta name="robots" content="noindex">
       <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="googlebot" content="notranslate" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="css/normalize.css" />
-      <link rel="stylesheet" href="css/style.css" />
-      <link rel="stylesheet" href="css/list.css" />
+      <meta name="description" content="">
+      <!--<link href="styles/ie10_11.css" rel="stylesheet" type="text/css"/>-->
+      <link href="css/list.css" rel="stylesheet" type="text/css"/>
+      <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
     <input type="text" id="search" placeholder="Search library..." onkeyup="searchFunction()"/>
