@@ -40,7 +40,7 @@
         <p>This library was curated while using Yomichan in conjunction with JMdict. <strong>It is far from comprehensive</strong>, and so should be viewed as a supplemental library.</p>
         <p>Audio files here were derived from <a href="https://forvo.com">Forvo</a>. Having some knowledge in sound design, I've edited a lot of pronunciations to be more consistent and usable in Anki.</p>
         <p>Here are some comparisons between original and edited pronunciations sourced from Forvo.</p>
-        <audio><strong>Warning: It seems that your browser does not support the audio element.</strong></audio>
+        <audio><strong>Note: It seems that your browser does not support the audio element.</strong></audio>
         <div class="audiocomparison">
           <p>期末テスト:</p>
           <audio controls>
@@ -64,8 +64,8 @@
             <source src="assets/audio_comparison/ドット絵_edited.mp3" type="audio/mpeg"> <!-- The nuance is back!!! -->
           </audio>
         </div>
-        <p>Generally, all audio files will peak around -6db, which is consistent with JapanesePod101's audio.</p>
-        <p>While this library is curated by myself, I can accept additional pronunciation files provided they meet the basic sound consistency found in this library. Please <a href="https://oliverspeak.com/contact">contact me</a> for this, and preferably include licenses and sources if applicable.</p>
+        <p>Generally, all audio files will peak around -6db.</p>
+        <p>I curated this library by myself, I can accept additional pronunciation files provided they meet the basic sound consistency found in this library. Please <a href="https://oliverspeak.com/contact">contact me</a> for this, and preferably include licences and sources if applicable.</p>
       </div>
       <label for="toggle2" class="toggle_text"><h3>Connect Yomichan to OPL</h3></label>
       <input type="checkbox" id="toggle2"/>
@@ -85,11 +85,12 @@
         </style>
         <p>Connecting via Yomichan is simple:
           <ol>
-            <li><p>Open Yomichan's settings and navigate to "Configure audio playback sources...".</p><img src="assets/images/pic1.png" alt="Image 1" width="700" class="lightimg"><img src="assets/images/pic1_dark.png" alt="Image 1" width="700" class="darkimg"></li>
-            <li><p>Add a new audio source and select Custom URL.</p><img src="assets/images/pic2.png" alt="Image 2" width="700" class="lightimg"><img src="assets/images/pic2_dark.png" alt="Image 2" width="700" class="darkimg"></li>
-            <li><p>Input: https://opl.oliverspeak.com/search?term={term}&reading={reading} as the URL.</p><img src="assets/images/pic3.png" alt="Image 3" width="700" class="lightimg"><img src="assets/images/pic3_dark.png" alt="Image 3" width="700" class="darkimg"></li>
+            <li>Open Yomichan's settings and navigate to "Configure audio playback sources...".</p><img src="assets/images/pic1.png" alt="Image 1" width="700" class="lightimg"><img src="assets/images/pic1_dark.png" alt="Image 1" width="700" class="darkimg"></li>
+            <li>Add a new audio source and select Custom URL.</p><img src="assets/images/pic2.png" alt="Image 2" width="700" class="lightimg"><img src="assets/images/pic2_dark.png" alt="Image 2" width="700" class="darkimg"></li>
+            <li>Input <strong>https://opl.oliverspeak.com/search?term={term}&reading={reading}</strong> as the URL.</p><img src="assets/images/pic3.png" alt="Image 3" width="700" class="lightimg"><img src="assets/images/pic3_dark.png" alt="Image 3" width="700" class="darkimg"></li>
           </ol>
-          <p>Note that OPL has some words that JapanesePod101 already has, so it's up to you if OPL takes priority over JapanesePod101.</p>
+          <p>I suggest you prioritise OPL if you are also sourcing directly from Forvo.
+            <br>It's also worth noting that OPL will have a few pronunciations already covered by JapanesePod101, but are poor quality (too quiet, etc).</p>
         </p>
       </div>
     </div>
