@@ -86,31 +86,8 @@
     $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$reading_answer_conv.mp3";
     header('Location: '.$target);
     exit();
+  } else {
+    exit();
   }
+  
 ?>
-<?php include('scripts/head.php') ?>
-      <title>The Back End - OPL</title>
-      <meta name="robots" content="noindex">
-      <meta name="googlebot" content="notranslate" />
-  </head>
-  <style>
-    body {
-    font-family: "Arial", sans-serif;
-    font-size: 1em;
-    }
-    a:link {
-      color: black;
-      font-family: "Arial", sans-serif;
-    }
-    a:visited {
-      color: black;
-    }
-    a:hover {
-      text-decoration: none;
-    }
-  </style>
-  <body>
-    <p>Welcome to the back end.<br>Your curiosity paid off, for here is a cat!</p>
-    <p>&emsp;^•ﻌ•^ฅ - meow</p><p>Follow <a href="/">this</a> link to return to the main page.</p>
-  </body>
-</html>
