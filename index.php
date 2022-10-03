@@ -34,6 +34,7 @@
     <div class="secondpage"><h1>Oliver's Pronunciation Library</h1></div>
     <div class=page>  
       <p>This is a collection of Japanese pronunciation audio files made to cover words, expressions and onomatopoeia that JapanesePod101 doesn't (such as 大貧民, 伝家の宝刀, and ふかふか). This library is optimised for use with <a href="https://apps.ankiweb.net">Anki</a>, and can be hooked up to <a href="https://foosoft.net/projects/yomichan">Yomichan</a>.</p>
+      <hr>
       <label for="toggle" class="toggle_text"><h3>Further Reading</h3></label>
       <input type="checkbox" id="toggle"/>
       <div class="toggle_reading" id="collapse">
@@ -92,6 +93,13 @@
           <p>I suggest you prioritise OPL if you are also sourcing directly from Forvo.
             <br>It's also worth noting that OPL will have a few pronunciations already covered by JapanesePod101, but are poor quality (too quiet, etc).</p>
         </p>
+      </div>
+      <div class="serve">
+        <?php
+          $dir = 'assets/audio/';
+          $f = count(glob($dir.'*'));
+          echo 'Currently serving '.$f.' files.';
+        ?>
       </div>
     </div>
     <style>
