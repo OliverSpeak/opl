@@ -66,7 +66,7 @@
           </audio>
         </div>
         <p>Generally, all audio files will peak around -6db.</p>
-        <p>I curated this library by myself, I can accept additional pronunciation files provided they meet the basic sound consistency found in this library. Please <a href="https://oliverspeak.com/contact">contact me</a> for this, and preferably include licences and sources if applicable.</p>
+        <p>While this library is curated by myself, I can accept additional pronunciation files provided they meet the basic sound consistency. Please <a href="https://oliverspeak.com/contact">contact me</a> for this, and preferably include licences and sources if applicable.</p>
       </div>
       <label for="toggle2" class="toggle_text"><h3>Connect Yomichan to OPL</h3></label>
       <input type="checkbox" id="toggle2"/>
@@ -91,8 +91,11 @@
             <li>Input <strong>https://opl.oliverspeak.com/search?term={term}&reading={reading}</strong> as the URL.</p><img src="assets/images/pic3.png" alt="Image 3" width="700" class="lightimg"><img src="assets/images/pic3_dark.png" alt="Image 3" width="700" class="darkimg"></li>
           </ol>
           <p>I suggest you prioritise OPL if you are also sourcing directly from Forvo.
-            <br>It's also worth noting that OPL will have a few pronunciations already covered by JapanesePod101, but are poor quality (too quiet, etc).</p>
-        </p>
+            <br>It's worth noting that OPL will have a few pronunciations already covered by JapanesePod101, but are poor quality (too quiet, etc).</p>
+          <p>Right now, some caveats exist with the Yomichan integration.
+            <br>Firstly, queries may not always match with file names when readings are a mix of hiragana and katakana (e.g. きまつテスト).
+            <br>Secondly, some pronunciations may be incorrect when there are multiple readings for a word, or if there's variation in pitch accent. This will only happen when there is no exact file for a pronunciation, and the server chooses a file based on kanji only.</p>
+            <p>I plan to remedy these caveats in the future, but for the most part, it shouldn't cause <em>much</em> trouble.</p>
       </div>
       <div class="serve">
         <?php
