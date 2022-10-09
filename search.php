@@ -56,8 +56,6 @@
       $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$reading_answer_conv.mp3";
       header('Location: '.$target);
       exit();
-    } else {
-      exit();
     }
 
 
@@ -88,6 +86,8 @@
     $term_answer_conv = str_replace($good_diacritic,$bad_diacritic,$term_answer); // Reverts diacritic nuance again to match files.
     $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$term_answer_conv.mp3";
     header('Location: '.$target);
+    exit();
+  }  else {
     exit();
   }
   
