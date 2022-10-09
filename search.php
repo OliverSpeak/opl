@@ -28,6 +28,39 @@
   $reading_result = 0; // Changes to 1 if reading result is found.
   $reading_answer = 0; // Changes to $reading for injecting into $target.
 
+    // Search using $reading
+    if(in_array($reading,$list)){
+      $reading_answer = $reading;
+      $reading_result = 1;
+      //##echo $reading;
+    }
+    foreach($list as $key=>$value){ // For searching words with term and reading (e.g. 前々から_まえまえから)
+      $ex_val=explode('_',$value);
+      if(count($ex_val) == 2){
+        if($reading == explode('_',$value)[0]){
+          //##echo 'Reading Result: '.$list[$key];
+          $reading_answer = $list[$key];
+          $reading_result = 1;
+        } else if($reading == explode('_',$value)[1]){
+          //##echo 'Reading Result: '.$list[$key];
+          $reading_answer = $list[$key];
+          $reading_result = 1;
+        }
+        }
+    } 
+    //##echo '<p>$reading_result: '.$term_result.'<p>';
+  
+    // Redirect if a reading result is found
+    if ($reading_result ==! 0) {
+      $reading_answer_conv = str_replace($good_diacritic,$bad_diacritic,$reading_answer); // Reverts diacritic nuance to match files.
+      $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$reading_answer_conv.mp3";
+      header('Location: '.$target);
+      exit();
+    } else {
+      exit();
+    }
+
+
   // Search using $term
   if(in_array($term,$list)){
     $term_answer = $term;
@@ -55,38 +88,6 @@
     $term_answer_conv = str_replace($good_diacritic,$bad_diacritic,$term_answer); // Reverts diacritic nuance again to match files.
     $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$term_answer_conv.mp3";
     header('Location: '.$target);
-    exit();
-  }
-
-  // Search using $reading
-  if(in_array($reading,$list)){
-    $reading_answer = $reading;
-    $reading_result = 1;
-    //##echo $reading;
-  }
-  foreach($list as $key=>$value){ // For searching words with term and reading (e.g. 前々から_まえまえから)
-    $ex_val=explode('_',$value);
-    if(count($ex_val) == 2){
-      if($reading == explode('_',$value)[0]){
-        //##echo 'Reading Result: '.$list[$key];
-        $reading_answer = $list[$key];
-        $reading_result = 1;
-      } else if($reading == explode('_',$value)[1]){
-        //##echo 'Reading Result: '.$list[$key];
-        $reading_answer = $list[$key];
-        $reading_result = 1;
-      }
-      }
-  } 
-  //##echo '<p>$reading_result: '.$term_result.'<p>';
-
-  // Redirect if a reading result is found
-  if ($reading_result ==! 0) {
-    $reading_answer_conv = str_replace($good_diacritic,$bad_diacritic,$reading_answer); // Reverts diacritic nuance to match files.
-    $target = "https://$_SERVER[HTTP_HOST]/assets/audio/pronunciation_ja_$reading_answer_conv.mp3";
-    header('Location: '.$target);
-    exit();
-  } else {
     exit();
   }
   
