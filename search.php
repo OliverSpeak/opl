@@ -6,8 +6,10 @@
 
   // Process url query
   $term = $_GET['term'];
-  $reading = $_GET['reading'];
-  // Create $list - an array of all audio files, with just the words as the string
+  $r = $_GET['reading'];
+  $reading = mb_convert_kana($r,'c'); // Change katakana to hiragana to improve query matching.
+  
+  // Create $list - an array of all audio files, with just the words as the string.
   $list = scandir("assets/audio/");
   $excessfiletext = array('pronunciation_ja_','.mp3');
   for ($i = 0; $i < sizeof($list); $i++) {
