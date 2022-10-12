@@ -39,7 +39,7 @@
       <input type="checkbox" id="toggle"/>
       <div class="toggle_reading" id="collapse">
         <p>This library was curated while using Yomichan in conjunction with JMdict. <strong>It is far from comprehensive</strong>, and so should be viewed as a supplemental library.</p>
-        <p>Audio files here were derived from <a href="https://forvo.com">Forvo</a>. Having some knowledge in sound design, I've edited a lot of pronunciations to be more consistent and usable in Anki.</p>
+        <p>Audio files here were derived from <a href="https://forvo.com">Forvo</a>. Having some knowledge in sound design, I've edited a lot of pronunciations to be more consistent and usable in Anki, making OPL advantageous in terms of quality.</p>
         <p>Here are some comparisons between original and edited pronunciations sourced from Forvo.</p>
         <audio><strong>Note: It seems that your browser does not support the audio element.</strong></audio>
         <div class="audiocomparison">
@@ -66,6 +66,8 @@
           </audio>
         </div>
         <p>Generally, all audio files will peak around -6db.</p>
+        <p>Additionally, this server has the advantage of accounting for any combination of kana in readings (for instance, the reading きまつテスト will match with きまつてすと). Generally, this will help cover words with varied kana readings.
+        </p>
         <p>While this library is curated by myself, I can accept additional pronunciation files provided they meet the basic sound consistency. Please <a href="https://oliverspeak.com/contact">contact me</a> for this, and preferably include licences and sources if applicable.</p>
       </div>
       <label for="toggle2" class="toggle_text"><h3>Connect Yomichan to OPL</h3></label>
@@ -93,9 +95,7 @@
           <p>I suggest you prioritise OPL if you are also sourcing directly from Forvo.
             <br>It's worth noting that OPL will have a few pronunciations already covered by JapanesePod101, but are poor quality (too quiet, etc).</p>
           <p>Right now, some caveats exist with the Yomichan integration.
-            <br>Firstly, queries may not always match with file names when readings are a mix of hiragana and katakana (e.g. きまつテスト).
-            <br>Secondly, some pronunciations may be incorrect when there are multiple readings for a word, or if there's variation in pitch accent. This will only happen when there is no exact file for a pronunciation, and the server chooses a file based on kanji only.</p>
-            <p>I plan to remedy these caveats in the future, but for the most part, it shouldn't cause <em>much</em> trouble.</p>
+            <br>For instance, some pronunciations may be incorrect when there are multiple readings for a word, or if there's variation in pitch accent. This only happens when there isn't an exact pronunciation, and the server chooses a file based on the term, rather than the reading.</p>
       </div>
       <div class="serve">
         <?php
